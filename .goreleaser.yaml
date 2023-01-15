@@ -256,6 +256,16 @@ checksum:
   name_template: "checksums.txt"
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
+sboms:
+  - artifacts: package
+    id: sbom-package
+  - artifacts: archive
+    id: sbom-archive
+  - artifacts: binary
+    id: sbom-binary
+  - artifacts: source
+    id: sbom-source
+
 changelog:
   sort: asc
   filters:
