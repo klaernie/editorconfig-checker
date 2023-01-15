@@ -47,6 +47,7 @@ RUN apt-get update && apt-get install -yq \
         ssl-cert \
         fish \
         zsh \
+        curl \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 # ARG base
 # FROM ${base}
