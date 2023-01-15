@@ -6,12 +6,10 @@ FROM ubuntu:latest
 # - sudo, while not required, is recommended to be installed, since the
 #   workspace user (`gitpod`) is non-root and won't be able to install
 #   and use `sudo` to install any other tools in a live workspace.
-RUN debconf-set-selections <<<'debconf debconf/frontend select Noninteractive' \
-    && apt-get update && apt-get install -yq \
+RUN apt-get update && apt-get install -yq \
     git \
     git-lfs \
     sudo \
-    && debconf-set-selections <<<'debconf debconf/frontend select Readline' \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 # configure git-lfs
@@ -24,8 +22,7 @@ USER gitpod
 
 USER root
 
-RUN debconf-set-selections <<<'debconf debconf/frontend select Noninteractive' \
-    && apt-get update && apt-get install -yq --no-install-recommends \
+RUN apt-get update && apt-get install -yq --no-install-recommends \
         zip \
         unzip \
         bash-completion \
@@ -52,7 +49,6 @@ RUN debconf-set-selections <<<'debconf debconf/frontend select Noninteractive' \
         zsh \
         curl \
         apt-utils \
-    && debconf-set-selections <<<'debconf debconf/frontend select Readline' \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 # ARG base
 # FROM ${base}
@@ -66,7 +62,7 @@ ENV TRIGGER_REBUILD=1
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \
-    && apt update \
+    && apt-get update \
     && apt-get install -yq --no-install-recommends docker-ce docker-ce-cli containerd.io \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
