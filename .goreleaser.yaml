@@ -122,8 +122,8 @@ nfpms:
 #     # we live in tweetspace and your description wants to look good in the snap
 #     # store.
 #     description: |-
-#       This is a tool to check if your files consider your .editorconfig rules. 
-#       Most tools—like linters, for example—only test one filetype and need an extra 
+#       This is a tool to check if your files consider your .editorconfig rules.
+#       Most tools—like linters, for example—only test one filetype and need an extra
 #       configuration. This tool only needs your .editorconfig to check all files.
 #     # A guardrail to prevent you from releasing a snap to all your users before
 #     # it is ready.
@@ -143,7 +143,7 @@ nfpms:
 #     # Default is empty.
 #     base: bare
 # chocolateys:
-#   - 
+#   -
 #     # Your app's owner.
 #     # It basically means your.
 #     # Defaults empty.
@@ -174,8 +174,8 @@ nfpms:
 #     # Supports markdown.
 #     description: |
 #       {{ .ProjectName }} installer package.
-#       This is a tool to check if your files consider your .editorconfig rules. 
-#       Most tools—like linters, for example—only test one filetype and need an extra 
+#       This is a tool to check if your files consider your .editorconfig rules.
+#       Most tools—like linters, for example—only test one filetype and need an extra
 #       configuration. This tool only needs your .editorconfig to check all files.
 #     # Your app's release notes.
 #     # A description of the changes made in this release of the package.
@@ -184,7 +184,7 @@ nfpms:
 #     # acceptable.
 #     # Default is empty.
 #     release_notes: "https://github.com/editorconfig-checker/editorconfig-checker/releases/tag/{{ .Version }}"
-    
+
 #     # The api key that should be used to push to the chocolatey repository.
 #     #
 #     # WARNING: do not expose your api key in the configuration file!
@@ -202,19 +202,19 @@ nfpms:
 
 dockers:
   - image_templates:
-    - "mstruebing/editorconfig-checker"
-    - "mstruebing/editorconfig-checker:latest"
-    - "mstruebing/editorconfig-checker:{{ .Tag }}"
-    - "mstruebing/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
-    - "mstruebing/editorconfig-checker:v{{ .Major }}"
-    - "mstruebing/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
-    # - "ghcr.io/editorconfig-checker/editorconfig-checker"
-    - "ghcr.io/editorconfig-checker/editorconfig-checker:latest"
-    - "ghcr.io/editorconfig-checker/editorconfig-checker:{{ .Tag }}"
-    - "ghcr.io/editorconfig-checker/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
-    - "ghcr.io/editorconfig-checker/editorconfig-checker:v{{ .Major }}"
-    - "ghcr.io/editorconfig-checker/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
-"
+      - "mstruebing/editorconfig-checker"
+      - "mstruebing/editorconfig-checker:latest"
+      - "mstruebing/editorconfig-checker:{{ .Tag }}"
+      - "mstruebing/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
+      - "mstruebing/editorconfig-checker:v{{ .Major }}"
+      - "mstruebing/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
+      # - "ghcr.io/editorconfig-checker/editorconfig-checker"
+      - "ghcr.io/editorconfig-checker/editorconfig-checker:latest"
+      - "ghcr.io/editorconfig-checker/editorconfig-checker:{{ .Tag }}"
+      - "ghcr.io/editorconfig-checker/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
+      - "ghcr.io/editorconfig-checker/editorconfig-checker:v{{ .Major }}"
+      - "ghcr.io/editorconfig-checker/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
+
     # Skips the docker push.
     # Could be useful if you also do draft releases.
     #
@@ -230,15 +230,16 @@ dockers:
     # Podman is a GoReleaser Pro feature and is only available on Linux.
     #
     # Defaults to docker.
-    use: buildx
-        # Template of the docker build flags.
+    use:
+      buildx
+      # Template of the docker build flags.
     build_flag_templates:
-    - "--pull"
-    - "--label=org.opencontainers.image.created={{.Date}}"
-    - "--label=org.opencontainers.image.title={{.ProjectName}}"
-    - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-    - "--label=org.opencontainers.image.version={{.Version}}"
-    - "--platform=linux/arm64"
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--platform=linux/arm64"
 checksum:
   name_template: "checksums.txt"
 snapshot:
