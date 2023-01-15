@@ -1,5 +1,6 @@
 # This is an example .goreleaser.yml file with some sensible defaults.
 # Make sure to check the documentation at https://goreleaser.com
+project_name: editorconfig-checker
 before:
   hooks:
     # You may remove this if you don't use go modules.
@@ -7,16 +8,125 @@ before:
     # you may remove this if you don't need go generate
     - go generate ./...
 builds:
-  - env:
+  - # ID of the build.
+    # Defaults to the binary name.
+    id: "editorconfig-checker"
+
+    # Path to main.go file or main package.
+    # Notice: when used with `gomod.proxy`, this must be a package.
+    #
+    # Default is `.`.
+    main: ./cmd/editorconfig-checker
+    env:
       - CGO_ENABLED=0
     goos:
       - linux
       - windows
       - darwin
-    main: cmd/editorconfig-checker
 
+    # Set the modified timestamp on the output binary, typically
+    # you would do this to ensure a build was reproducible. Pass
+    # empty string to skip modifying the output.
+    # Default is empty string, which will be the compile time.
+    mod_timestamp: "{{ .CommitTimestamp }}"
+    flags:
+      - -trimpath
+    # Custom ldflags templates.
+    # Default is `-s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}} -X main.builtBy=goreleaser`.
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+      - -X main.commit={{.Commit}} -X main.date={{.CommitDate}}
+      - -X main.builtBy=goreleaser
+
+  - # ID of the build.
+    # Defaults to the binary name.
+    id: ec
+
+    # Path to main.go file or main package.
+    # Notice: when used with `gomod.proxy`, this must be a package.
+    #
+    # Default is `.`.
+    main: ./cmd/editorconfig-checker
+
+    # Binary name.
+    # Can be a path (e.g. `bin/app`) to wrap the binary in a directory.
+    # Default is the name of the project directory.
+    # binary: bin/ec
+    binary: bin/ec-{{- .Os }}-{{- .Arch }}{{ .Ext }}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - aix
+      - android
+      - darwin
+      - dragonfly
+      - freebsd
+      - illumos
+      - ios
+      - js
+      - linux
+      - netbsd
+      - openbsd
+      - plan9
+      - solaris
+      - windows
+    goarch:
+      - 386
+      - amd64
+      - arm
+      - arm64
+      # - loong64 # Not built by the old mechanism
+      - mips
+      - mips64
+      - mips64le
+      - mipsle
+      - ppc64
+      - ppc64le
+      - riscv64
+      - wasm
+
+    # List of combinations of GOOS + GOARCH + GOARM to ignore.
+    # Default is empty.
+    ignore:
+      - goos: linux
+        goarch: loong64
+      - goos: android
+        goarch: amd64
+      - goos: android
+        goarch: arm
+      - goos: android
+        goarch: 386
+      - goos: ios
+        goarch: arm64
+      - goos: ios
+        goarch: amd64
+
+    # If true, skip the build.
+    # Useful for library projects.
+    # Default is false
+    skip: false
+
+# GoReleaser can create macOS Universal Binaries - also known as Fat Binaries.
+# Those binaries are in a special format that contains both `arm64` and `amd64`
+# executables in a single file.
+universal_binaries:
+  # Whether to remove the previous single-arch binaries from the artifact list.
+  # If left as false, your end release might have both several macOS archives:
+  # amd64, arm64 and all.
+  #
+  # Defaults to false.
+  - replace: true
 archives:
-  - format: tar.gz
+  - # ID of this archive.
+    # Defaults to `default`.
+    id: archive-editorconfig-checker
+
+    # Builds reference which build instances should be archived in this archive.
+    # Default is empty, which includes all builds.
+    builds:
+      - editorconfig-checker
+
+    format: tar.gz
     # this name template makes the OS and Arch compatible with the results of uname.
     name_template: >-
       {{ .ProjectName }}_
@@ -29,6 +139,44 @@ archives:
     format_overrides:
       - goos: windows
         format: zip
+    # This will make the destination paths be relative to the longest common
+    # path prefix between all the files matched and the source glob.
+    # Enabling this essentially mimic the behavior of nfpm's contents section.
+    # It will be the default by June 2023.
+    #
+    # Default: false
+    # Since: v1.14.
+    rlcp: true
+  - # This archive format is to be compatible with the old release mechanism.
+    # It introduces flaws (like using .tar.gz on Windows)
+
+    # ID of this archive.
+    # Defaults to `default`.
+    id: archive-ec
+
+    # Builds reference which build instances should be archived in this archive.
+    # Default is empty, which includes all builds.
+    builds:
+      - ec
+    format: tar.gz
+    name_template: >-
+      ec-
+      {{- .Os }}-
+      {{- .Arch }}{{ .ArtifactExt }}
+    # This will make the destination paths be relative to the longest common
+    # path prefix between all the files matched and the source glob.
+    # Enabling this essentially mimic the behavior of nfpm's contents section.
+    # It will be the default by June 2023.
+    #
+    # Default: false
+    # Since: v1.14.
+    rlcp: true
+    # Additional files/template/globs you want to add to the archive.
+    # Defaults are any files matching `LICENSE*`, `README*`, `CHANGELOG*`,
+    #  `license*`, `readme*` and `changelog*`.
+    files:
+      - none*
+
 checksum:
   name_template: "checksums.txt"
 snapshot:
