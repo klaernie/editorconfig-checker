@@ -81,6 +81,164 @@ archives:
     # Since: v1.14.
     rlcp: true
 
+# GoReleaser can be wired to nfpm to generate and publish `.deb`, `.rpm`, `.apk`, and Archlinux packages.
+nfpms:
+  - # Your app's vendor.
+    # Default is empty.
+    vendor: Editorconfig-Checker
+    # Template to your app's homepage.
+    # Default is empty.
+    homepage: https://editorconfig-checker.github.io/
+    # Your app's maintainer (probably you).
+    # Default is empty.
+    maintainer: Max Strübing <mxstrbng@gmail.com>
+    # Template to your app's description.
+    # Default is empty.
+    description: |-
+      A tool to verify that your files are in harmony with your .editorconfig
+    # Your app's license.
+    # Default is empty.
+    license: MIT
+
+    # Formats to be generated.
+    formats:
+      - apk
+      - deb
+      - rpm
+      - termux.deb # Since GoReleaser v1.11.
+      - archlinux # Since GoReleaser v1.13.
+# snapcrafts:
+#   - # Whether to publish the snap to the snapcraft store.
+#     # Remember you need to `snapcraft login` first.
+#     # Defaults to false.
+#     publish: false
+
+#     # Single-line elevator pitch for your amazing snap.
+#     # 79 char long at most.
+#     summary: A tool to verify that your files are in harmony with your .editorconfig
+
+#     # This the description of your snap. You have a paragraph or two to tell the
+#     # most important story about your snap. Keep it under 100 words though,
+#     # we live in tweetspace and your description wants to look good in the snap
+#     # store.
+#     description: |-
+#       This is a tool to check if your files consider your .editorconfig rules. 
+#       Most tools—like linters, for example—only test one filetype and need an extra 
+#       configuration. This tool only needs your .editorconfig to check all files.
+#     # A guardrail to prevent you from releasing a snap to all your users before
+#     # it is ready.
+#     # `devel` will let you release only to the `edge` and `beta` channels in the
+#     # store. `stable` will let you release also to the `candidate` and `stable`
+#     # channels.
+#     grade: devel
+#     # Your app's license, based on SPDX license expressions:
+#     # https://spdx.org/licenses
+#     # Default is empty.
+#     license: MIT
+#     # A snap of type base to be used as the execution environment for this snap.
+#     # Valid values are:
+#     # * bare - Empty base snap;
+#     # * core - Ubuntu Core 16;
+#     # * core18 - Ubuntu Core 18.
+#     # Default is empty.
+#     base: bare
+# chocolateys:
+#   - 
+#     # Your app's owner.
+#     # It basically means your.
+#     # Defaults empty.
+#     owners: Editorconfig-Checker
+#     # Your app's authors (probably you).
+#     # Defaults are shown below.
+#     authors: Max Strübing
+#     # Your app's project url.
+#     # It is a required field.
+#     project_url: https://editorconfig-checker.github.io/
+#     # Your app's copyright details.
+#     # Default is empty.
+#     # copyright:
+#     # App's license information url.
+#     license_url: https://github.com/editorconfig-checker/editorconfig-checker/blob/main/LICENSE
+#     # Your app's source url.
+#     # Default is empty.
+#     project_source_url: https://github.com/editorconfig-checker/editorconfig-checker
+#     # Your app's documentation url.
+#     # Default is empty.
+#     docs_url: https://github.com/editorconfig-checker/editorconfig-checker/blob/main/README.md
+#     # App's bugtracker url.
+#     # Default is empty.
+#     bug_tracker_url: https://github.com/editorconfig-checker/editorconfig-checker/issues
+#      # Your app's summary:
+#     summary: A tool to verify that your files are in harmony with your .editorconfig
+#     # This the description of your chocolatey package.
+#     # Supports markdown.
+#     description: |
+#       {{ .ProjectName }} installer package.
+#       This is a tool to check if your files consider your .editorconfig rules. 
+#       Most tools—like linters, for example—only test one filetype and need an extra 
+#       configuration. This tool only needs your .editorconfig to check all files.
+#     # Your app's release notes.
+#     # A description of the changes made in this release of the package.
+#     # Supports markdown. To prevent the need to continually update this field,
+#     # providing a URL to an external list of Release Notes is perfectly
+#     # acceptable.
+#     # Default is empty.
+#     release_notes: "https://github.com/editorconfig-checker/editorconfig-checker/releases/tag/{{ .Version }}"
+    
+#     # The api key that should be used to push to the chocolatey repository.
+#     #
+#     # WARNING: do not expose your api key in the configuration file!
+#     api_key: '{{ .Env.CHOCOLATEY_API_KEY }}'
+
+#     # The source repository that will push the package to.
+#     #
+#     # Defaults are shown below.
+#     source_repo: "https://push.chocolatey.org/"
+
+#     # Setting this will prevent goreleaser to actually try to push the package
+#     # to chocolatey repository, leaving the responsability of publishing it to
+#     # the user.
+#     skip_publish: true
+
+dockers:
+  - image_templates:
+    - "mstruebing/editorconfig-checker"
+    - "mstruebing/editorconfig-checker:latest"
+    - "mstruebing/editorconfig-checker:{{ .Tag }}"
+    - "mstruebing/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
+    - "mstruebing/editorconfig-checker:v{{ .Major }}"
+    - "mstruebing/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
+    # - "ghcr.io/editorconfig-checker/editorconfig-checker"
+    - "ghcr.io/editorconfig-checker/editorconfig-checker:latest"
+    - "ghcr.io/editorconfig-checker/editorconfig-checker:{{ .Tag }}"
+    - "ghcr.io/editorconfig-checker/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
+    - "ghcr.io/editorconfig-checker/editorconfig-checker:v{{ .Major }}"
+    - "ghcr.io/editorconfig-checker/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
+"
+    # Skips the docker push.
+    # Could be useful if you also do draft releases.
+    #
+    # If set to auto, the release will not be pushed to the Docker repository
+    #  in case there is an indicator of a prerelease in the tag, e.g. v1.0.0-rc1.
+    #
+    # Defaults to false.
+    skip_push: auto
+    # Set the "backend" for the Docker pipe.
+    #
+    # Valid options are: docker, buildx, podman.
+    #
+    # Podman is a GoReleaser Pro feature and is only available on Linux.
+    #
+    # Defaults to docker.
+    use: buildx
+        # Template of the docker build flags.
+    build_flag_templates:
+    - "--pull"
+    - "--label=org.opencontainers.image.created={{.Date}}"
+    - "--label=org.opencontainers.image.title={{.ProjectName}}"
+    - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+    - "--label=org.opencontainers.image.version={{.Version}}"
+    - "--platform=linux/arm64"
 checksum:
   name_template: "checksums.txt"
 snapshot:
