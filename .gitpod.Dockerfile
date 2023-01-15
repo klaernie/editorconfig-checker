@@ -77,10 +77,10 @@ RUN curl -o /tmp/dive.deb -fsSL https://github.com/wagoodman/dive/releases/downl
 
 USER gitpod
 
-ARG base
-FROM ${base}
+# ARG base
+# FROM ${base}
 
-ARG GO_VERSION
+ARG GO_VERSION=1.19.5
 
 USER gitpod
 
