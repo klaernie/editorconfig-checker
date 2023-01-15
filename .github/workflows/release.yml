@@ -15,6 +15,8 @@ jobs:
   goreleaser:
     runs-on: ubuntu-latest
     steps:
+      - name: Install syft
+        run: curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
