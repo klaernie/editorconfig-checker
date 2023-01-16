@@ -234,7 +234,7 @@ dockers:
     #  in case there is an indicator of a prerelease in the tag, e.g. v1.0.0-rc1.
     #
     # Defaults to false.
-    skip_push: auto
+    # skip_push: auto
     # Set the "backend" for the Docker pipe.
     #
     # Valid options are: docker, buildx, podman.
