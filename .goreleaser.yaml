@@ -267,7 +267,7 @@ sboms:
     id: sbom-source
 
 changelog:
-  use: github-native
+  use: github #-native
   sort: asc
   filters:
     exclude:
