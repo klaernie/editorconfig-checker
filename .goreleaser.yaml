@@ -1,6 +1,8 @@
 # This is an example .goreleaser.yml file with some sensible defaults.
 # Make sure to check the documentation at https://goreleaser.com
 project_name: editorconfig-checker
+env:
+  - REPO_LICENSE=MIT
 before:
   hooks:
     # You may remove this if you don't use go modules.
@@ -98,7 +100,7 @@ nfpms:
       A tool to verify that your files are in harmony with your .editorconfig
     # Your app's license.
     # Default is empty.
-    license: MIT
+    license: "{{ .Env.REPO_LICENSE }}"
 
     # Formats to be generated.
     formats:
@@ -251,6 +253,9 @@ dockers:
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
+      - --label "org.opencontainers.image.source={{.GitURL}}"
+      - --label "org.opencontainers.image.description=A tool to verify that your files are in harmony with your .editorconfig"
+      - --label "org.opencontainers.image.licenses={{ .Env.REPO_LICENSE }}"
       # - "--platform=linux/arm64"
 checksum:
   name_template: "checksums.txt"
