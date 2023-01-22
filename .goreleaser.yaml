@@ -248,14 +248,13 @@ dockers:
       buildx
       # Template of the docker build flags.
     build_flag_templates:
-      - "--pull"
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
-      - --label "org.opencontainers.image.source={{.GitURL}}"
-      - --label "org.opencontainers.image.description=A tool to verify that your files are in harmony with your .editorconfig"
-      - --label "org.opencontainers.image.licenses={{ .Env.REPO_LICENSE }}"
+      - "--label=org.opencontainers.image.source={{.GitURL}}"
+      - "--label=org.opencontainers.image.description=A tool to verify that your files are in harmony with your .editorconfig"
+      - "--label=org.opencontainers.image.licenses={{ .Env.REPO_LICENSE }}"
       # - "--platform=linux/arm64"
 checksum:
   name_template: "checksums.txt"
