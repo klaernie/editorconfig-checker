@@ -9,6 +9,23 @@ before:
     - go mod tidy
     # you may remove this if you don't need go generate
     - go generate ./...
+    # # - cmd: echo "Version is {{ .Version }}" > log.txt
+    # - echo "Version is {{ .Version }}"
+    # - echo "RawVersion is {{ .RawVersion }}"
+    # - echo "Summary is {{ .Summary }}"
+    # # - echo "PrefixedTag is {{ .PrefixedTag }}"
+    # # - echo "ReleaseNotes is {{ .ReleaseNotes }}"
+    # - echo "Major is {{ .Major }}"
+    # - echo "Minor is {{ .Minor }}"
+    # - echo "Patch is {{ .Patch }}"
+    # - echo "Prerelease is {{ .Prerelease }}"
+    # - echo "GitURL is {{ .GitURL }}"
+    # - echo "Env is {{ .Env }}"
+    # # - echo "Version is {{ .Version }}" > log111.txt
+    # # - echo "PrefixedTag is ;;{{ .PrefixedTag }};;"
+# after:
+#   hooks:
+#     - echo "Version is {{ .Version }}" > log111.txt
 builds:
   - # ID of the build.
     # Defaults to the binary name.
@@ -203,52 +220,72 @@ nfpms:
 #     skip_publish: true
 
 dockers:
-  - image_templates:
-      # - "mstruebing/editorconfig-checker"
-      # - "mstruebing/editorconfig-checker:latest"
-      # - "mstruebing/editorconfig-checker:{{ .Tag }}"
-      # - "mstruebing/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
-      # - "mstruebing/editorconfig-checker:v{{ .Major }}"
-      # - "mstruebing/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
-      # # - "ghcr.io/editorconfig-checker/editorconfig-checker"
-      # - "ghcr.io/editorconfig-checker/editorconfig-checker:latest"
-      # - "ghcr.io/editorconfig-checker/editorconfig-checker:{{ .Tag }}"
-      # - "ghcr.io/editorconfig-checker/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
-      # - "ghcr.io/editorconfig-checker/editorconfig-checker:v{{ .Major }}"
-      # - "ghcr.io/editorconfig-checker/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
-      - "echoix/editorconfig-checker"
-      - "echoix/editorconfig-checker:latest"
-      - "echoix/editorconfig-checker:{{ .Tag }}"
-      # - "echoix/editorconfig-checker:{{ .Tag }}-{{ .Env.GOVERSION }}"
-      - "echoix/editorconfig-checker:v{{ .Major }}"
-      - "echoix/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
-      # - "ghcr.io/echoix/editorconfig-checker"
-      - "ghcr.io/echoix/editorconfig-checker:latest"
-      - "ghcr.io/echoix/editorconfig-checker:{{ .Tag }}"
-      # - "ghcr.io/echoix/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
-      - "ghcr.io/echoix/editorconfig-checker:v{{ .Major }}"
-      - "ghcr.io/echoix/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
+  # - image_templates:
+  #     # - "mstruebing/editorconfig-checker"
+  #     # - "mstruebing/editorconfig-checker:latest"
+  #     # - "mstruebing/editorconfig-checker:{{ .Tag }}"
+  #     # - "mstruebing/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
+  #     # - "mstruebing/editorconfig-checker:v{{ .Major }}"
+  #     # - "mstruebing/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
+  #     # # - "ghcr.io/editorconfig-checker/editorconfig-checker"
+  #     # - "ghcr.io/editorconfig-checker/editorconfig-checker:latest"
+  #     # - "ghcr.io/editorconfig-checker/editorconfig-checker:{{ .Tag }}"
+  #     # - "ghcr.io/editorconfig-checker/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
+  #     # - "ghcr.io/editorconfig-checker/editorconfig-checker:v{{ .Major }}"
+  #     # - "ghcr.io/editorconfig-checker/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
+  #     - "echoix/editorconfig-checker"
+  #     - "echoix/editorconfig-checker:latest"
+  #     - "echoix/editorconfig-checker:{{ .Tag }}"
+  #     # - "echoix/editorconfig-checker:{{ .Tag }}-{{ .Env.GOVERSION }}"
+  #     - "echoix/editorconfig-checker:v{{ .Major }}"
+  #     - "echoix/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
+  #     # - "ghcr.io/echoix/editorconfig-checker"
+  #     - "ghcr.io/echoix/editorconfig-checker:latest"
+  #     - "ghcr.io/echoix/editorconfig-checker:{{ .Tag }}"
+  #     # - "ghcr.io/echoix/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
+  #     - "ghcr.io/echoix/editorconfig-checker:v{{ .Major }}"
+  #     - "ghcr.io/echoix/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
 
-    dockerfile: goreleaser.Dockerfile
-    # Skips the docker push.
-    # Could be useful if you also do draft releases.
-    #
-    # If set to auto, the release will not be pushed to the Docker repository
-    #  in case there is an indicator of a prerelease in the tag, e.g. v1.0.0-rc1.
-    #
-    # Defaults to false.
+  #   dockerfile: goreleaser.Dockerfile
+  #   # Skips the docker push.
+  #   # Could be useful if you also do draft releases.
+  #   #
+  #   # If set to auto, the release will not be pushed to the Docker repository
+  #   #  in case there is an indicator of a prerelease in the tag, e.g. v1.0.0-rc1.
+  #   #
+  #   # Defaults to false.
+  #   # skip_push: auto
+
+  #   # Set the "backend" for the Docker pipe.
+  #   #
+  #   # Valid options are: docker, buildx, podman.
+  #   #
+  #   # Podman is a GoReleaser Pro feature and is only available on Linux.
+  #   #
+  #   # Defaults to docker.
+  #   use: buildx
+  #   # Template of the docker build flags.
+  #   build_flag_templates:
+  #     - "--label=org.opencontainers.image.created={{.Date}}"
+  #     - "--label=org.opencontainers.image.title={{.ProjectName}}"
+  #     - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  #     - "--label=org.opencontainers.image.version={{.Version}}"
+  #     - "--label=org.opencontainers.image.source={{.GitURL}}"
+  #     - "--label=org.opencontainers.image.description=A tool to verify that your files are in harmony with your .editorconfig"
+  #     - "--label=org.opencontainers.image.licenses={{ .Env.REPO_LICENSE }}"
+  #     # - "--platform=linux/arm64,linux/amd64"
+  #     # - "--platform=linux/arm64"
+
+  - id: docker-linux-amd64
+    ids: 
+      - editorconfig-checker
+    goos: linux
+    goarch: amd64
     # skip_push: auto
-
-    # Set the "backend" for the Docker pipe.
-    #
-    # Valid options are: docker, buildx, podman.
-    #
-    # Podman is a GoReleaser Pro feature and is only available on Linux.
-    #
-    # Defaults to docker.
-    use:
-      buildx
-      # Template of the docker build flags.
+    use: buildx
+    dockerfile: goreleaser.Dockerfile
+    image_templates:
+      - "echoix/editorconfig-checker:{{ .Tag }}-amd64"
     build_flag_templates:
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
@@ -257,8 +294,9 @@ dockers:
       - "--label=org.opencontainers.image.source={{.GitURL}}"
       - "--label=org.opencontainers.image.description=A tool to verify that your files are in harmony with your .editorconfig"
       - "--label=org.opencontainers.image.licenses={{ .Env.REPO_LICENSE }}"
-      # - "--platform=linux/arm64,linux/amd64"
-      # - "--platform=linux/arm64"
+      - "--platform=linux/amd64"
+      
+
 checksum:
   name_template: "checksums.txt"
 # snapshot:
