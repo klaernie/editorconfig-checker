@@ -287,10 +287,10 @@ changelog:
       order: 1
     - title: Others
       order: 999
-  filters:
-    exclude:
-      - "^docs:"
-      - "^test:"
+  # filters:
+  #   exclude:
+  #     - "^docs:"
+  #     - "^test:"
 
 release:
   # What to do with the release notes in case there the release already exists.
@@ -312,6 +312,21 @@ release:
   # If set to true, will mark the release as not ready for production.
   # Default is false.
   prerelease: auto
+
+  # Header template for the release body.
+  # Defaults to empty.
+  header: |
+    ## editorconfig-checker {{ .Tag }} ({{ .Date }})
+
+    Welcome to this new release of editorconfig-checker!
+
+  # Footer template for the release body.
+  # Defaults to empty.
+  footer: |
+    ## Thanks!
+
+    Those were the changes on {{ .Tag }}!
+
 # The lines beneath this are called `modelines`. See `:help modeline`
 # Feel free to remove those if you don't want/use them.
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
