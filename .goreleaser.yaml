@@ -370,7 +370,7 @@ docker_manifests:
     name_template: "echoix/editorconfig-checker:{{ .Tag }}"
     image_templates:
       - "echoix/editorconfig-checker:{{ .Tag }}-amd64"
-      - "echoix/editorconfig-checker:{{ .Tag }}-arm64"
+      - "echoix/editorconfig-checker:{{ .Tag }}-arm64v8"
       - "echoix/editorconfig-checker:{{ .Tag }}-arm32v6"
       - "echoix/editorconfig-checker:{{ .Tag }}-i386"
 
