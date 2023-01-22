@@ -223,7 +223,7 @@ dockers:
       # - "ghcr.io/echoix/editorconfig-checker"
       - "ghcr.io/echoix/editorconfig-checker:latest"
       - "ghcr.io/echoix/editorconfig-checker:{{ .Tag }}"
-      # - "ghcr.io/echoix/editorconfig-checker:{{ .Tag }}-{{ .Env.GOVERSION }}"
+      - "ghcr.io/echoix/editorconfig-checker:{{ .Tag }}-{{ .Env.GO_VERSION }}"
       - "ghcr.io/echoix/editorconfig-checker:v{{ .Major }}"
       - "ghcr.io/echoix/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
 
