@@ -229,6 +229,7 @@ dockers:
       - "ghcr.io/echoix/editorconfig-checker:v{{ .Major }}"
       - "ghcr.io/echoix/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
 
+    dockerfile: goreleaser.Dockerfile
     # Skips the docker push.
     # Could be useful if you also do draft releases.
     #
@@ -256,7 +257,7 @@ dockers:
       - "--label=org.opencontainers.image.source={{.GitURL}}"
       - "--label=org.opencontainers.image.description=A tool to verify that your files are in harmony with your .editorconfig"
       - "--label=org.opencontainers.image.licenses={{ .Env.REPO_LICENSE }}"
-      - "--platform=linux/arm64,linux/amd64"
+      # - "--platform=linux/arm64,linux/amd64"
       # - "--platform=linux/arm64"
 checksum:
   name_template: "checksums.txt"
