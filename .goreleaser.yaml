@@ -3,6 +3,8 @@
 project_name: editorconfig-checker
 env:
   - REPO_LICENSE=MIT
+  # - DOCKERHUB_USERNAME=echoix
+  - DOCKERHUB_USERNAME={{ if index .Env "DOCKERHUB_USERNAME"  }}{{ .Env.DOCKERHUB_USERNAME }}{{ else }}echoix2{{ end }}
 before:
   hooks:
     # You may remove this if you don't use go modules.
@@ -21,6 +23,8 @@ before:
     # - echo "Prerelease is {{ .Prerelease }}"
     # - echo "GitURL is {{ .GitURL }}"
     # - echo "Env is {{ .Env }}"
+    # - echo ".Env.ENV_WITH_DEFAULT is {{ .Env.ENV_WITH_DEFAULT }}"
+    - echo ".Env.DOCKERHUB_USERNAME is {{ .Env.DOCKERHUB_USERNAME }}"
     # # - echo "Version is {{ .Version }}" > log111.txt
     # # - echo "PrefixedTag is ;;{{ .PrefixedTag }};;"
 # after:
@@ -290,7 +294,7 @@ dockers:
     use: buildx
     dockerfile: goreleaser.Dockerfile
     image_templates:
-      - "echoix/editorconfig-checker:{{ .Tag }}-amd64"
+      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
       - "ghcr.io/echoix/editorconfig-checker:{{ .Tag }}-amd64"
     build_flag_templates:
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -310,7 +314,7 @@ dockers:
     use: buildx
     dockerfile: goreleaser.Dockerfile
     image_templates:
-      - "echoix/editorconfig-checker:{{ .Tag }}-i386"
+      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
       - "ghcr.io/echoix/editorconfig-checker:{{ .Tag }}-i386"
     build_flag_templates:
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -331,7 +335,7 @@ dockers:
     use: buildx
     dockerfile: goreleaser.Dockerfile
     image_templates:
-      - "echoix/editorconfig-checker:{{ .Tag }}-arm64v8"
+      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
       - "ghcr.io/echoix/editorconfig-checker:{{ .Tag }}-arm64v8"
     build_flag_templates:
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -353,7 +357,7 @@ dockers:
     use: buildx
     dockerfile: goreleaser.Dockerfile
     image_templates:
-      - "echoix/editorconfig-checker:{{ .Tag }}-arm32v6"
+      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm32v6"
       - "ghcr.io/echoix/editorconfig-checker:{{ .Tag }}-arm32v6"
     build_flag_templates:
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -367,12 +371,12 @@ dockers:
 docker_manifests:
   - id: docker_manifest-dockerhub-tag
     skip_push: false
-    name_template: "echoix/editorconfig-checker:{{ .Tag }}"
+    name_template: "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}"
     image_templates:
-      - "echoix/editorconfig-checker:{{ .Tag }}-amd64"
-      - "echoix/editorconfig-checker:{{ .Tag }}-arm64v8"
-      - "echoix/editorconfig-checker:{{ .Tag }}-arm32v6"
-      - "echoix/editorconfig-checker:{{ .Tag }}-i386"
+      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
+      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
+      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm32v6"
+      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
 
 checksum:
   name_template: "checksums.txt"
