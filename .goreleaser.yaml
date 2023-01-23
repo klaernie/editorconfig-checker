@@ -411,29 +411,26 @@ docker_manifests:
     skip_push: false
     name_template:  "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
     image_templates:
-      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm32v6"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm32v6"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
   - id: docker_manifest-ghcr-vMajor
     skip_push: false
     name_template:  "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:v{{ .Major }}"
     image_templates:
-      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm32v6"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm32v6"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
   - id: docker_manifest-ghcr-latest
     skip_push: false
     name_template:  "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:latest"
     image_templates:
-      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:v{{ .Major }}"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm32v6"
-      # - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm32v6"
+      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
 checksum:
   name_template: "checksums.txt"
 # snapshot:
