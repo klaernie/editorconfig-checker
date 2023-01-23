@@ -3,7 +3,6 @@
 project_name: editorconfig-checker
 env:
   - REPO_LICENSE=MIT
-  # - DOCKERHUB_USERNAME=echoix
   - DOCKERHUB_USERNAME={{ if index .Env "DOCKERHUB_USERNAME"  }}{{ .Env.DOCKERHUB_USERNAME }}{{ else }}echoix2{{ end }}
 before:
   hooks:
@@ -23,8 +22,6 @@ before:
     # - echo "Prerelease is {{ .Prerelease }}"
     # - echo "GitURL is {{ .GitURL }}"
     # - echo "Env is {{ .Env }}"
-    # - echo ".Env.ENV_WITH_DEFAULT is {{ .Env.ENV_WITH_DEFAULT }}"
-    - echo ".Env.DOCKERHUB_USERNAME is {{ .Env.DOCKERHUB_USERNAME }}"
     # # - echo "Version is {{ .Version }}" > log111.txt
     # # - echo "PrefixedTag is ;;{{ .PrefixedTag }};;"
 # after:
