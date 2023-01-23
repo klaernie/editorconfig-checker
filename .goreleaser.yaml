@@ -383,18 +383,6 @@ docker_manifests:
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm32v6"
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
-  - id: docker_manifest-ghcr-tag2
-    skip_push: false
-    name_template:  "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-2"
-    image_templates:
-      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
-      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
-      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm32v6"
-      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
-      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
-      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
-      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm32v6"
-      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
 checksum:
   name_template: "checksums.txt"
 # snapshot:
