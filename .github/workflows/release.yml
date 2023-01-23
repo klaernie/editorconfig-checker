@@ -56,3 +56,9 @@ jobs:
           # Your GoReleaser Pro key, if you are using the 'goreleaser-pro'
           # distribution:
           # GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
+      - name: Update repo description on Docker Hub
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: ${{ secrets.DOCKER_USERNAME }}/editorconfig-checker
