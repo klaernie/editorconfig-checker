@@ -307,7 +307,7 @@ dockers:
     ids:
       - editorconfig-checker
     goos: linux
-    goarch: amd64
+    goarch: 386
     # skip_push: auto
     use: buildx
     dockerfile: goreleaser.Dockerfile
@@ -378,7 +378,7 @@ docker_manifests:
       - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
   - id: docker_manifest-ghcr-tag
     skip_push: false
-    name_template:  "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}"
+    name_template: "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}"
     image_templates:
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
@@ -412,7 +412,7 @@ docker_manifests:
 
   - id: docker_manifest-ghcr-vMajor
     skip_push: auto
-    name_template:  "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:v{{ .Major }}"
+    name_template: "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:v{{ .Major }}"
     image_templates:
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
@@ -420,7 +420,7 @@ docker_manifests:
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
   - id: docker_manifest-ghcr-vMajorMinor
     skip_push: auto
-    name_template:  "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
+    name_template: "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:v{{ .Major }}.{{ .Minor }}"
     image_templates:
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
@@ -428,7 +428,7 @@ docker_manifests:
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
   - id: docker_manifest-ghcr-latest
     skip_push: auto
-    name_template:  "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:latest"
+    name_template: "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:latest"
     image_templates:
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-arm64v8"
