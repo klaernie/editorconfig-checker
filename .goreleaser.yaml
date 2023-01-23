@@ -294,8 +294,6 @@ dockers:
     image_templates:
       - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-amd64"
-      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-1"
-      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-1"
     build_flag_templates:
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
@@ -316,8 +314,6 @@ dockers:
     image_templates:
       - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
       - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-i386"
-      - "{{ .Env.DOCKERHUB_USERNAME }}/editorconfig-checker:{{ .Tag }}-1"
-      - "ghcr.io/{{ .Env.GHCR_USERNAME }}/editorconfig-checker:{{ .Tag }}-1"
     build_flag_templates:
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
