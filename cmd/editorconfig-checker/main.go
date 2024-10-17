@@ -18,7 +18,7 @@ import (
 
 // version is used vor the help
 // version is dynamically set at compiletime
-var version string = "v3.0.3" // x-release-please-version
+var version string = "v3.1.0" // x-release-please-version
 
 // defaultConfigFileNames determines the file names where the config is located
 var defaultConfigFileNames = []string{".editorconfig-checker.json", ".ecrc"}
